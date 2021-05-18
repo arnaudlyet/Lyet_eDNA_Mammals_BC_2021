@@ -1,0 +1,25 @@
+
+    
+    model{ 
+    
+    #priors 
+    for (j in 1:n.sp){
+      p[j] ~ dunif(0,0.2)
+    }
+
+    #### model describing detection probability per species per sample
+    for(j in 1:n.sp){ 
+      for (i in 1:n.samp){ 
+        y[i,j] ~ dbin(p[j],l[i]) # detection event of species j in sample i
+      }
+    } 
+    
+    for (j in 1:n.sp){
+ 
+        P60[j] <- 1-(1-p[j])^60
+
+    }
+ 
+    } #end model description
+    
+    
